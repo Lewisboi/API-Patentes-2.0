@@ -23,7 +23,7 @@ jobs:
           node-version: lts/*
 
       - name: Build step
-        run: sudo docker-compose up -d --build 📝 Update the build command(s)
+        run: sudo docker-compose up -d --build
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
