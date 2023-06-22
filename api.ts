@@ -4,9 +4,9 @@ import { getInfoByPlate } from "./scraper.ts";
 const router = new Router();
 router
   .get("/:plate", async (context) => {
-    console.log("GET /:plate", "from", context.request.ip);
-    if (context.params && context.params.plate) {
-      const plate = context.params.plate;
+    const plate = context.params.plate;
+    console.log(`GET /${plate}`, "from", context.request.ip);
+    if (context.params && plate) {
       try {
         const info = await getInfoByPlate(plate);
         context.response.body = info;
