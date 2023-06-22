@@ -4,4 +4,4 @@ services:
   api:
     build: .
     ports:
-      - "8000:8000"
+      - "443:8000"
