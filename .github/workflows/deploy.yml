@@ -29,5 +29,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "short-donkey-23"
-          entrypoint: "index.js" # 📝 Update the entrypoint
+          entrypoint: "api.ts"
           root: "."
