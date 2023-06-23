@@ -1,5 +1,9 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 import { getInfoByPlate } from "./scraper.ts";
+import { load } from "https://deno.land/std/dotenv/mod.ts";
+
+const env = await load();
+const PORT = parseInt(env.PORT) || 8000;
 
 const router = new Router();
 router
@@ -21,5 +25,5 @@ const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-console.log(`HTTP webserver running. Access it at: http://localhost:8000/`);
-await app.listen({ port: 8000 });
+console.log(`HTTP webserver running. Access it at port ${PORT}`);
+await app.listen({ port: PORT });
