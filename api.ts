@@ -1,9 +1,7 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 import { getInfoByPlate } from "./scraper.ts";
-import { load } from "https://deno.land/std/dotenv/mod.ts";
 
-const env = await load();
-const PORT = parseInt(env.PORT) || 8080;
+const PORT = parseInt(Deno.env.get("PORT") as string) || 8000;
 
 const router = new Router();
 router
