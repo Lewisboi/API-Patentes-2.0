@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
 # Set the DISPLAY environment variable to use the virtual display
 ENV DISPLAY=:99
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome
+EXPOSE 8000
 
 # Add a script to start xvfb and your application
 COPY start.sh /start.sh
