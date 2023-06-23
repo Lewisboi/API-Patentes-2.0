@@ -7,6 +7,7 @@ const router = new Router();
 router
   .get("/:plate", async (context) => {
     const plate = context.params.plate;
+    console.log("--------------------");
     console.log(`GET /${plate}`, "from", context.request.ip);
     if (context.params && plate) {
       try {
@@ -17,6 +18,7 @@ router
         context.response.body = { error: error.message };
       }
     }
+    console.log("--------------------");
   });
 
 const app = new Application();

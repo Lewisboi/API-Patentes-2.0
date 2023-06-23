@@ -2,6 +2,7 @@ import puppeteer, {
   ElementHandle,
 } from "https://deno.land/x/puppeteer@16.2.0/mod.ts";
 import { cleanKey } from "./keyCleaner.ts";
+import { composeMiddleware } from "https://deno.land/x/oak/mod.ts";
 // Source URL consts
 const SEARCHBOX_ID = "#searchbox";
 const INPUT_FIELD_ID = "#txtTerm";
@@ -12,26 +13,20 @@ const SERVICE_URL = "https://www.patentechile.com/";
 export async function getInfoByPlate(
   plate: string,
 ): Promise<Record<string, string>> {
-  console.log("launching browser");
   const browser = await puppeteer.launch({
     headless: false,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
-  console.log("browser launched")
-  console.log("opening page");
   const page = await browser.newPage();
   await page.goto(SERVICE_URL, { waitUntil: "networkidle0" });
-  console.log("page opened");
 
   // Get the search box element and the input field element
-  console.log("waiting for search box");
   const searchBox = await page.waitForSelector(SEARCHBOX_ID) as ElementHandle<
     ElementHandle
   >;
   const inputField = await searchBox.waitForSelector(
     INPUT_FIELD_ID,
   ) as ElementHandle<ElementHandle>;
-  console.log("search box found");
 
   // Type the selected text into the input field
   await inputField.type(plate);
@@ -76,6 +71,7 @@ export async function getInfoByPlate(
     data_to_return[cleanKey(description)] = data;
   }
   await browser.close();
-
+  console.log("Scraping done");
+  console.log(`Returning ${JSON.stringify(data_to_return)}`)
   return data_to_return;
 }
