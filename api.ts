@@ -3,7 +3,7 @@ import { getInfoByPlate } from "./scraper.ts";
 import { load } from "https://deno.land/std/dotenv/mod.ts";
 
 const env = await load();
-const PORT = parseInt(env.PORT) || 8000;
+const PORT = parseInt(env.PORT) || 8080;
 
 const router = new Router();
 router
